@@ -1,11 +1,21 @@
 ---
 import Site from "../layouts/Site.astro";
 import {
-  CATEGORIES,
-  PROJECTS,
-  categoryCount,
+  categorieOccupate,
+  categoriaPrincipale,
+  contaPerCategoria,
+  idsCategorie,
   projectHref,
-} from "../data/projects";
+  tuttiIProgetti,
+} from "../lib/archivio";
+
+const [progetti, categorie] = await Promise.all([tuttiIProgetti(), categorieOccupate()]);
+const cards = await Promise.all(
+  progetti.map(async (p) => {
+    const principale = await categoriaPrincipale(p);
+    return { p, principale };
+  }),
+);
 ---
 
 <Site
@@ -20,10 +30,13 @@ import {
     </section>
 
     <nav class="filters mono" id="filters" aria-label="Filtra per categoria">
+      <button type="button" data-filter="ALL" class="active">
+        All <span>({progetti.length})</span>
+      </button>
       {
-        CATEGORIES.map((cat) => (
-          <button type="button" data-filter={cat.id} class={cat.id === "ALL" ? "active" : undefined}>
-            {cat.label} <span>({categoryCount(cat.id)})</span>
+        categorie.map((cat) => (
+          <button type="button" data-filter={cat.id}>
+            {cat.data.label} <span>({contaPerCategoria(progetti, cat.id)})</span>
           </button>
         ))
       }
@@ -31,12 +44,12 @@ import {
 
     <section class="works-grid" id="worksGrid">
       {
-        PROJECTS.map((p) => (
-          <a class="work-card" href={projectHref(p.slug)} data-cat={p.category}>
-            <img class="work-img" src={p.photo} alt={p.title} />
+        cards.map(({ p, principale }) => (
+          <a class="work-card" href={projectHref(p.id)} data-cats={idsCategorie(p).join(" ")}>
+            <img class="work-img" src={p.data.foto} alt={p.data.titolo} />
             <div class="card-meta">
-              <span class="mono">{p.title}</span>
-              <span class="mono">{p.type} · {p.year}</span>
+              <span class="mono">{p.data.titolo}</span>
+              <span class="mono">{principale?.data.label} · {p.data.anno}</span>
             </div>
           </a>
         ))

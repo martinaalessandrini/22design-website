@@ -9,7 +9,8 @@ if (filters && grid) {
       filters.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       cards.forEach((card) => {
-        const show = id === "ALL" || card.dataset.cat === id;
+        const cats = (card.dataset.cats ?? "").split(" ").filter(Boolean);
+        const show = id === "ALL" || cats.includes(id ?? "");
         card.classList.toggle("hidden", !show);
       });
     });

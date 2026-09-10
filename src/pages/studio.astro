@@ -1,5 +1,8 @@
 ---
 import Site from "../layouts/Site.astro";
+import { categorieOccupate } from "../lib/archivio";
+
+const categorie = await categorieOccupate();
 ---
 
 <Site
@@ -17,10 +20,14 @@ import Site from "../layouts/Site.astro";
       <p class="about-text">STUDIO MONO nasce nel 2017 dall'incontro di due architetti con un'ossessione comune: ridurre fino all'essenziale. Lavoriamo su residenze, interior e allestimenti, spazi pubblici e concorsi. Ci piace il cantiere: il progetto non finisce sullo schermo, ma nel modo in cui il sole colpisce un muro alle cinque di sera.</p>
 
       <div class="services">
-        <div class="service mono"><span>01</span>Residenze</div>
-        <div class="service mono"><span>02</span>Interior &amp; allestimenti</div>
-        <div class="service mono"><span>03</span>Spazi pubblici</div>
-        <div class="service mono"><span>04</span>Concorsi</div>
+        {
+          categorie.map((cat, i) => (
+            <div class="service mono">
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              {cat.data.label}
+            </div>
+          ))
+        }
       </div>
     </section>
 

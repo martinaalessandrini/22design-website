@@ -56,7 +56,7 @@ if (form && status) {
     const nome = form.elements.namedItem("name") as HTMLInputElement;
     const email = form.elements.namedItem("email") as HTMLInputElement;
     const msg = form.elements.namedItem("message") as HTMLTextAreaElement;
-    const tipo = form.elements.namedItem("tipo") as HTMLSelectElement;
+    const categoria = form.elements.namedItem("categoria") as HTMLSelectElement;
 
     if (!nome.value.trim()) {
       markInvalid(nome, "Serve il tuo nome.");
@@ -86,7 +86,7 @@ if (form && status) {
           subject: "Nuovo messaggio dal sito STUDIO MONO",
           name: nome.value.trim(),
           email: email.value.trim(),
-          tipo: tipo.value,
+          categoria: categoria.value,
           message: msg.value.trim(),
         }),
       });

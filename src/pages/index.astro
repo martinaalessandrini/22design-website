@@ -1,19 +1,27 @@
 ---
 import Base from "../layouts/Base.astro";
 import {
-  CATEGORIES,
-  PROJECTS,
-  categoryCount,
-} from "../data/projects";
+  categorieOccupate,
+  contaPerCategoria,
+  cubiHome,
+  tuttiIProgetti,
+} from "../lib/archivio";
 import "../styles/global.css";
 import "../styles/home.css";
 
 const title = "STUDIO MONO — Architettura Contemporanea";
 const description =
   "STUDIO MONO — studio di architettura contemporanea. Il modello orbitale dell'archivio: residenze, interior e allestimenti, spazi pubblici e concorsi.";
+
+const [progetti, categorie, cubi] = await Promise.all([
+  tuttiIProgetti(),
+  categorieOccupate(),
+  cubiHome(),
+]);
 ---
 
 <Base title={title} description={description} home>
+  <script id="archivio-json" type="application/json" is:inline set:html={JSON.stringify(cubi)} />
   <div id="scene" role="img" aria-label="Modello orbitale dei progetti dello studio"></div>
 
   <header class="home-header">
@@ -26,20 +34,18 @@ const description =
   </header>
 
   <div class="home-ui">
-    <p class="mono home-kicker" id="homeKicker">Archivio orbitale — {PROJECTS.length} progetti</p>
+    <p class="mono home-kicker" id="homeKicker">Archivio orbitale — {progetti.length} progetti</p>
     <h1 class="home-title">Il <em>modello</em><br>dello studio.</h1>
     <p class="mono home-hint" id="homeHint">Trascina per esplorare · rotella per avvicinare · clicca un progetto</p>
     <nav class="home-filters mono" id="homeFilters" aria-label="Filtra progetti">
       <span class="mono home-filters-label">Filtra:</span>
+      <button type="button" class="home-filter active" data-filter="ALL" disabled>
+        All <span>({progetti.length})</span>
+      </button>
       {
-        CATEGORIES.map((cat) => (
-          <button
-            type="button"
-            class:list={["home-filter", { active: cat.id === "ALL" }]}
-            data-filter={cat.id}
-            disabled
-          >
-            {cat.label} <span>({categoryCount(cat.id)})</span>
+        categorie.map((cat) => (
+          <button type="button" class="home-filter" data-filter={cat.id} disabled>
+            {cat.data.label} <span>({contaPerCategoria(progetti, cat.id)})</span>
           </button>
         ))
       }

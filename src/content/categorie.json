@@ -1,0 +1,6 @@
+[
+  { "id": "residenze", "label": "Residenze", "ordine": 1 },
+  { "id": "interior-allestimenti", "label": "Interior & allestimenti", "ordine": 2 },
+  { "id": "spazi-pubblici", "label": "Spazi pubblici", "ordine": 3 },
+  { "id": "concorsi", "label": "Concorsi", "ordine": 4 }
+]

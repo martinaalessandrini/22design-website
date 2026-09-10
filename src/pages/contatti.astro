@@ -1,5 +1,8 @@
 ---
 import Site from "../layouts/Site.astro";
+import { categorieOccupate } from "../lib/archivio";
+
+const categorie = await categorieOccupate();
 ---
 
 <Site
@@ -27,12 +30,9 @@ import Site from "../layouts/Site.astro";
         </label>
         <label class="field">
           <span class="mono">Tipo di progetto</span>
-          <select name="tipo" required>
+          <select name="categoria" required>
             <option value="" disabled selected>Seleziona…</option>
-            <option>Residenze</option>
-            <option>Interior &amp; allestimenti</option>
-            <option>Spazi pubblici</option>
-            <option>Concorsi</option>
+            {categorie.map((cat) => <option value={cat.data.label}>{cat.data.label}</option>)}
           </select>
         </label>
         <label class="field">

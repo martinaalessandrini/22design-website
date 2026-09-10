@@ -1,5 +1,14 @@
 import { createHome3D } from "./home3d";
-import { projectHref, type Project } from "../data/projects";
+
+type CubeProject = {
+  slug: string;
+  title: string;
+  year: number;
+  img: string;
+  photo: string;
+  categorie: string[];
+  principaleLabel: string;
+};
 
 const scene = document.getElementById("scene");
 const tip = document.getElementById("cubeTip");
@@ -7,6 +16,8 @@ const tipText = tip?.querySelector(".cube-tip-inner");
 const filtersEl = document.getElementById("homeFilters");
 const hintEl = document.getElementById("homeHint");
 const loadingEl = document.getElementById("homeLoading");
+const dataEl = document.getElementById("archivio-json");
+const projects: CubeProject[] = dataEl ? JSON.parse(dataEl.textContent || "[]") : [];
 
 function hideLoading() {
   loadingEl?.classList.add("is-done");
@@ -28,7 +39,7 @@ if (!scene) {
   hideLoading();
 } else {
   try {
-    const app = createHome3D(scene);
+    const app = createHome3D(scene, projects);
 
     filtersEl?.querySelectorAll("button").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -55,8 +66,8 @@ if (!scene) {
       }
     });
 
-    app.onSelect((project: Project) => {
-      window.location.assign(projectHref(project.slug));
+    app.onSelect((project: CubeProject) => {
+      window.location.assign(`/progetto/${project.slug}`);
     });
 
     app.ready.then(() => {

@@ -1,59 +1,68 @@
 ---
+import { getCollection } from "astro:content";
 import Site from "../../layouts/Site.astro";
 import {
-  PROJECTS,
-  categoryLabel,
+  categoriaPrincipale,
   fallbackIdea,
   fallbackIntro,
   fallbackTecnica,
   projectPic,
   titleHtml,
-} from "../../data/projects";
+  type Progetto,
+} from "../../lib/archivio";
 
-export function getStaticPaths() {
-  return PROJECTS.map((project) => ({
-    params: { slug: project.slug },
+export async function getStaticPaths() {
+  const progetti = await getCollection("progetti");
+  return progetti.map((project) => ({
+    params: { slug: project.id },
     props: { project },
   }));
 }
 
+interface Props {
+  project: Progetto;
+}
+
 const { project } = Astro.props;
-const lastWordItalic = titleHtml(project.title);
+const principale = await categoriaPrincipale(project);
+const label = principale?.data.label ?? "";
+const lastWordItalic = titleHtml(project.data.titolo);
+const intro = project.data.intro ?? fallbackIntro(project.data.titolo, label);
 ---
 
 <Site
-  title={`${project.title} — STUDIO MONO`}
-  description={`${project.title}: ${project.type} progettato da STUDIO MONO, ${project.year}.`}
+  title={`${project.data.titolo} — STUDIO MONO`}
+  description={`${project.data.titolo}: ${label} progettato da STUDIO MONO, ${project.data.anno}.`}
   current="works"
 >
   <main class="detail">
     <section class="detail-head">
-      <p class="hero-meta mono">{categoryLabel(project.category)} — {project.year} · {project.type}</p>
+      <p class="hero-meta mono">{label} — {project.data.anno}</p>
       <h1 class="page-title" set:html={lastWordItalic} />
-      <p class="detail-intro">{project.intro ?? fallbackIntro(project)}</p>
+      <p class="detail-intro">{intro}</p>
     </section>
 
-    <figure class="ph detail-hero" data-reveal style={`background-image: url('${projectPic(project, "01")}')`}></figure>
+    <figure class="ph detail-hero" data-reveal style={`background-image: url('${projectPic(project.data.foto, "01")}')`}></figure>
 
     <section class="detail-meta mono" data-reveal>
-      <div><span>Committente</span><b>{project.committente ?? "—"}</b></div>
-      <div><span>Luogo</span><b>{project.luogo ?? "—"}</b></div>
-      <div><span>Anno</span><b>{project.year}</b></div>
-      <div><span>Superficie</span><b>{project.superficie ?? "—"}</b></div>
+      <div><span>Committente</span><b>{project.data.committente ?? "—"}</b></div>
+      <div><span>Luogo</span><b>{project.data.luogo ?? "—"}</b></div>
+      <div><span>Anno</span><b>{project.data.anno}</b></div>
+      <div><span>Superficie</span><b>{project.data.superficie ?? "—"}</b></div>
       <div><span>Stato</span><b>Completato</b></div>
     </section>
 
     <section class="detail-body" data-reveal>
       <div>
         <h3 class="mono">L'idea</h3>
-        <p>{project.idea ?? fallbackIdea()}</p>
+        <p>{project.data.idea ?? fallbackIdea()}</p>
       </div>
-      <figure class="ph detail-idea" aria-label="Immagine del progetto" data-reveal style={`background-image: url('${projectPic(project, "02")}')`}></figure>
+      <figure class="ph detail-idea" aria-label="Immagine del progetto" data-reveal style={`background-image: url('${projectPic(project.data.foto, "02")}')`}></figure>
       <div>
         <h3 class="mono">Tecnica</h3>
-        <p>{project.tecnica ?? fallbackTecnica()}</p>
+        <p>{project.data.tecnica ?? fallbackTecnica()}</p>
       </div>
-      <figure class="ph detail-tecnica" aria-label="Dettaglio tecnico" data-reveal style={`background-image: url('${projectPic(project, "03")}')`}></figure>
+      <figure class="ph detail-tecnica" aria-label="Dettaglio tecnico" data-reveal style={`background-image: url('${projectPic(project.data.foto, "03")}')`}></figure>
     </section>
 
     <section class="detail-pager">

@@ -2,13 +2,17 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import gsap from "gsap";
-import { PROJECTS, projectsByCategory } from "../data/projects";
 
-    function reduceMotion() {
-        return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    }
+export function createHome3D(container, projects) {
+        function reduceMotion() {
+            return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        }
 
-export function createHome3D(container) {
+        function projectsByCategory(id) {
+            if (id === "ALL") return projects;
+            return projects.filter(function (p) { return p.categorie.indexOf(id) !== -1; });
+        }
+
         var hovered = null;
         var hoverEnabled = true;
         var hoverCallback = null;
@@ -340,7 +344,7 @@ export function createHome3D(container) {
                 var p = projectToScreen(group.position);
                 hoverCallback({
                     title: project.title,
-                    category: project.type,
+                    category: project.principaleLabel,
                     year: project.year,
                     x: p.x,
                     y: p.y,
@@ -703,7 +707,7 @@ export function createHome3D(container) {
         // First sizing of camera + background (prima dei resize eventi).
         resize();
         container.appendChild(renderer.domElement);
-        build(PROJECTS);
+        build(projects);
         entrance();
         tick();
 
