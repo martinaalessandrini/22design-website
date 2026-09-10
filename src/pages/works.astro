@@ -7,6 +7,7 @@ import {
   idsCategorie,
   projectHref,
   tuttiIProgetti,
+  withBase,
 } from "../lib/archivio";
 
 const [progetti, categorie] = await Promise.all([tuttiIProgetti(), categorieOccupate()]);
@@ -46,7 +47,7 @@ const cards = await Promise.all(
       {
         cards.map(({ p, principale }) => (
           <a class="work-card" href={projectHref(p.id)} data-cats={idsCategorie(p).join(" ")}>
-            <img class="work-img" src={p.data.foto} alt={p.data.titolo} />
+            <img class="work-img" src={withBase(p.data.foto)} alt={p.data.titolo} />
             <div class="card-meta">
               <span class="mono">{p.data.titolo}</span>
               <span class="mono">{principale?.data.label} · {p.data.anno}</span>

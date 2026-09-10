@@ -41,12 +41,19 @@ export function contaPerCategoria(progetti: Progetto[], categoriaId: string) {
   return progetti.filter((p) => idsCategorie(p).includes(categoriaId)).length;
 }
 
+export function withBase(path = "") {
+  const base = import.meta.env.BASE_URL ?? "/";
+  const prefix = base.endsWith("/") ? base : `${base}/`;
+  const cleaned = String(path).replace(/^\//, "");
+  return cleaned ? `${prefix}${cleaned}` : prefix;
+}
+
 export function projectHref(id: string) {
-  return `/progetto/${id}`;
+  return withBase(`progetto/${id}`);
 }
 
 export function projectPic(foto: string, n: "01" | "02" | "03") {
-  return foto.replace("01.jpg", `${n}.jpg`);
+  return withBase(foto.replace("01.jpg", `${n}.jpg`));
 }
 
 export function fallbackIntro(titolo: string, categoria: string) {
@@ -78,7 +85,7 @@ export async function cubiHome() {
         title: p.data.titolo,
         year: p.data.anno,
         img: p.data.img,
-        photo: p.data.foto,
+        photo: withBase(p.data.foto),
         categorie: idsCategorie(p),
         principaleLabel: principale?.data.label ?? "",
       };

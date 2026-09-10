@@ -1,6 +1,6 @@
 ---
 import Site from "../layouts/Site.astro";
-import { categorieOccupate } from "../lib/archivio";
+import { categorieOccupate, withBase } from "../lib/archivio";
 
 const categorie = await categorieOccupate();
 ---
@@ -62,7 +62,7 @@ const categorie = await categorieOccupate();
     </section>
 
     <section class="cta" data-reveal>
-      <a href="/works">
+      <a href={withBase("works")}>
         <p class="mono">Curiosi di vedere cosa sappiamo fare?</p>
         <h2>I progetti.</h2>
       </a>

@@ -5,6 +5,7 @@ import {
   contaPerCategoria,
   cubiHome,
   tuttiIProgetti,
+  withBase,
 } from "../lib/archivio";
 import "../styles/global.css";
 import "../styles/home.css";
@@ -25,11 +26,11 @@ const [progetti, categorie, cubi] = await Promise.all([
   <div id="scene" role="img" aria-label="Modello orbitale dei progetti dello studio"></div>
 
   <header class="home-header">
-    <a href="/" class="logo">STUDIO&nbsp;MONO<sup>®</sup></a>
+    <a href={withBase()} class="logo">STUDIO&nbsp;MONO<sup>®</sup></a>
     <nav class="home-nav" aria-label="Navigazione principale">
-      <a href="/works">Works</a>
-      <a href="/studio">Studio</a>
-      <a href="/contatti">Contatti</a>
+      <a href={withBase("works")}>Works</a>
+      <a href={withBase("studio")}>Studio</a>
+      <a href={withBase("contatti")}>Contatti</a>
     </nav>
   </header>
 
@@ -51,7 +52,7 @@ const [progetti, categorie, cubi] = await Promise.all([
       }
     </nav>
     <p class="mono home-legal">
-      Solo cookie tecnici, nessun tracciamento. <a href="/cookies">Cookie policy</a>
+      Solo cookie tecnici, nessun tracciamento. <a href={withBase("cookies")}>Cookie policy</a>
     </p>
   </div>
 

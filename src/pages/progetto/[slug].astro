@@ -8,6 +8,7 @@ import {
   fallbackTecnica,
   projectPic,
   titleHtml,
+  withBase,
   type Progetto,
 } from "../../lib/archivio";
 
@@ -66,8 +67,8 @@ const intro = project.data.intro ?? fallbackIntro(project.data.titolo, label);
     </section>
 
     <section class="detail-pager">
-      <a href="/works" class="btn">← Tutti i progetti</a>
-      <a href="/contatti" class="btn btn-dark">Raccontaci il tuo →</a>
+      <a href={withBase("works")} class="btn">← Tutti i progetti</a>
+      <a href={withBase("contatti")} class="btn btn-dark">Raccontaci il tuo →</a>
     </section>
   </main>
 </Site>

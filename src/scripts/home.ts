@@ -67,7 +67,7 @@ if (!scene) {
     });
 
     app.onSelect((project: CubeProject) => {
-      window.location.assign(`/progetto/${project.slug}`);
+      window.location.assign(`${import.meta.env.BASE_URL}progetto/${project.slug}`);
     });
 
     app.ready.then(() => {
