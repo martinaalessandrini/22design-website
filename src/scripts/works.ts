@@ -1,0 +1,17 @@
+const filters = document.getElementById("filters");
+const grid = document.getElementById("worksGrid");
+if (filters && grid) {
+  const cards = [...grid.querySelectorAll<HTMLElement>(".work-card")];
+
+  filters.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = (btn as HTMLButtonElement).dataset.filter;
+      filters.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      cards.forEach((card) => {
+        const show = id === "ALL" || card.dataset.cat === id;
+        card.classList.toggle("hidden", !show);
+      });
+    });
+  });
+}

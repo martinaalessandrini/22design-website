@@ -1,0 +1,47 @@
+---
+import Site from "../layouts/Site.astro";
+import {
+  CATEGORIES,
+  PROJECTS,
+  categoryCount,
+  projectHref,
+} from "../data/projects";
+---
+
+<Site
+  title="Works — STUDIO MONO"
+  description="Tutti i progetti di STUDIO MONO: residenze, architetture culturali e spazi pubblici."
+  current="works"
+>
+  <main>
+    <section class="page-hero">
+      <p class="hero-meta mono">Archivio completo — 2009 → oggi</p>
+      <h1 class="page-title">Opere <em>e</em> progetti.</h1>
+    </section>
+
+    <nav class="filters mono" id="filters" aria-label="Filtra per categoria">
+      {
+        CATEGORIES.map((cat) => (
+          <button type="button" data-filter={cat.id} class={cat.id === "ALL" ? "active" : undefined}>
+            {cat.label} <span>({categoryCount(cat.id)})</span>
+          </button>
+        ))
+      }
+    </nav>
+
+    <section class="works-grid" id="worksGrid">
+      {
+        PROJECTS.map((p) => (
+          <a class="work-card" href={projectHref(p.slug)} data-cat={p.category}>
+            <img class="work-img" src={p.photo} alt={p.title} />
+            <div class="card-meta">
+              <span class="mono">{p.title}</span>
+              <span class="mono">{p.type} · {p.year}</span>
+            </div>
+          </a>
+        ))
+      }
+    </section>
+  </main>
+  <script src="../scripts/works.ts"></script>
+</Site>

@@ -1,0 +1,64 @@
+---
+import Site from "../layouts/Site.astro";
+---
+
+<Site
+  title="Contatti — STUDIO MONO"
+  description="Contatta STUDIO MONO: scrivici un messaggio, vieni a trovarci a Milano."
+  current="contatti"
+>
+  <main class="contact-page">
+    <section class="page-hero">
+      <p class="hero-meta mono">Scrivici — rispondiamo in 48h</p>
+      <h1 class="page-title">Parliamo <em>del tuo</em> progetto?</h1>
+    </section>
+
+    <section class="contact-grid">
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <input type="hidden" name="access_key" value="a8101744-b52a-4c6c-8203-b1df18683b70" />
+        <input type="checkbox" name="botcheck" style="display: none;" tabindex="-1" autocomplete="off" />
+        <label class="field">
+          <span class="mono">Nome</span>
+          <input type="text" name="name" placeholder="Il tuo nome" required />
+        </label>
+        <label class="field">
+          <span class="mono">Email</span>
+          <input type="email" name="email" placeholder="nome@email.it" required />
+        </label>
+        <label class="field">
+          <span class="mono">Tipo di progetto</span>
+          <select name="tipo" required>
+            <option value="" disabled selected>Seleziona…</option>
+            <option>Residenze</option>
+            <option>Interior &amp; allestimenti</option>
+            <option>Spazi pubblici</option>
+            <option>Concorsi</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="mono">Messaggio</span>
+          <textarea name="message" rows="5" placeholder="Raccontaci il contesto, il luogo, i tempi…" required></textarea>
+        </label>
+        <button type="submit" class="btn btn-dark">Invia messaggio →</button>
+        <p class="form-status" id="formStatus" role="status"></p>
+      </form>
+
+      <aside class="contact-info">
+        <div>
+          <h3 class="mono">Studio</h3>
+          <p>Via Canova 14<br />20145 Milano, IT</p>
+          <p>Ven. 9:00 — 18:00<br />o su appuntamento</p>
+        </div>
+        <div>
+          <h3 class="mono">Ufficio</h3>
+          <p><a href="mailto:studio@mono.example">studio@mono.example</a></p>
+          <p><a href="tel:+390255123456">+39 02 5512 3456</a></p>
+        </div>
+        <div>
+          <h3 class="mono">Social</h3>
+          <p><a href="#">Instagram</a> · <a href="#">LinkedIn</a> · <a href="#">Are.na</a></p>
+        </div>
+      </aside>
+    </section>
+  </main>
+</Site>

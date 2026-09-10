@@ -1,0 +1,64 @@
+---
+import Site from "../../layouts/Site.astro";
+import {
+  PROJECTS,
+  categoryLabel,
+  fallbackIdea,
+  fallbackIntro,
+  fallbackTecnica,
+  projectPic,
+  titleHtml,
+} from "../../data/projects";
+
+export function getStaticPaths() {
+  return PROJECTS.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const lastWordItalic = titleHtml(project.title);
+---
+
+<Site
+  title={`${project.title} — STUDIO MONO`}
+  description={`${project.title}: ${project.type} progettato da STUDIO MONO, ${project.year}.`}
+  current="works"
+>
+  <main class="detail">
+    <section class="detail-head">
+      <p class="hero-meta mono">{categoryLabel(project.category)} — {project.year} · {project.type}</p>
+      <h1 class="page-title" set:html={lastWordItalic} />
+      <p class="detail-intro">{project.intro ?? fallbackIntro(project)}</p>
+    </section>
+
+    <figure class="ph detail-hero" data-reveal style={`background-image: url('${projectPic(project, "01")}')`}></figure>
+
+    <section class="detail-meta mono" data-reveal>
+      <div><span>Committente</span><b>{project.committente ?? "—"}</b></div>
+      <div><span>Luogo</span><b>{project.luogo ?? "—"}</b></div>
+      <div><span>Anno</span><b>{project.year}</b></div>
+      <div><span>Superficie</span><b>{project.superficie ?? "—"}</b></div>
+      <div><span>Stato</span><b>Completato</b></div>
+    </section>
+
+    <section class="detail-body" data-reveal>
+      <div>
+        <h3 class="mono">L'idea</h3>
+        <p>{project.idea ?? fallbackIdea()}</p>
+      </div>
+      <figure class="ph detail-idea" aria-label="Immagine del progetto" data-reveal style={`background-image: url('${projectPic(project, "02")}')`}></figure>
+      <div>
+        <h3 class="mono">Tecnica</h3>
+        <p>{project.tecnica ?? fallbackTecnica()}</p>
+      </div>
+      <figure class="ph detail-tecnica" aria-label="Dettaglio tecnico" data-reveal style={`background-image: url('${projectPic(project, "03")}')`}></figure>
+    </section>
+
+    <section class="detail-pager">
+      <a href="/works" class="btn">← Tutti i progetti</a>
+      <a href="/contatti" class="btn btn-dark">Raccontaci il tuo →</a>
+    </section>
+  </main>
+</Site>

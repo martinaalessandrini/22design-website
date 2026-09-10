@@ -1,0 +1,182 @@
+/* ============ Home 3D — UI sovrapposta alla scena ============ */
+
+/* Variabili condivise con style.css (:root) — caricate insieme. */
+
+.home-body {
+    margin: 0;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--paper);
+}
+
+#scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+}
+
+/* --- Header minimale --- */
+.home-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px var(--pad);
+    pointer-events: none;
+}
+.home-header a { pointer-events: auto; }
+
+.home-nav {
+    display: flex;
+    gap: clamp(18px, 3vw, 36px);
+}
+.home-nav a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.62;
+    transition: opacity 0.2s ease;
+}
+.home-nav a:hover { opacity: 1; }
+
+/* --- Blocco titolo / filtri / hint (bottom) --- */
+.home-ui {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    padding: clamp(20px, 5vw, 64px);
+    pointer-events: none;
+}
+
+.home-kicker {
+    opacity: 0.6;
+    font-size: 0.72rem;
+    margin-bottom: 14px;
+}
+
+.home-title {
+    font-size: clamp(2rem, 5.5vw, 4.6rem);
+    line-height: 0.98;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+.home-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+}
+
+.home-hint {
+    margin-top: 16px;
+    opacity: 0.5;
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+/* --- Filtri categoria --- */
+.home-filters {
+    pointer-events: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    max-width: min(720px, 90vw);
+}
+.home-filters-label {
+    opacity: 0.55;
+    margin-right: 4px;
+    font-size: 0.7rem;
+}
+.home-filter {
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    padding: 9px 15px;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    opacity: 0.5;
+    transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.home-filter span { opacity: 0.75; }
+.home-filter:hover { opacity: 1; }
+.home-filter.active {
+    background: var(--ink);
+    color: var(--paper);
+    opacity: 1;
+}
+.home-filter:disabled { opacity: 0.3; cursor: progress; }
+
+.home-legal {
+    pointer-events: auto;
+    margin-top: 16px;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    opacity: 0.42;
+    max-width: min(720px, 90vw);
+    line-height: 1.45;
+}
+.home-legal a { text-decoration: underline; }
+
+/* --- Tooltip progetto --- */
+.cube-tip {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 30;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: opacity 0.14s ease;
+    will-change: transform;
+}
+.cube-tip.is-hidden { opacity: 0; }
+
+.tip-title {
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+.tip-meta {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    opacity: 0.55;
+    white-space: nowrap;
+}
+
+/* --- Loading --- */
+.home-loading {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+.home-loading.is-done { opacity: 0; visibility: hidden; }
+
+/* --- Mobile --- */
+@media (max-width: 720px) {
+    .home-nav a { font-size: 0.8rem; }
+    .home-hint { white-space: normal; }
+    .home-filters { gap: 6px; margin-top: 20px; }
+    .home-filter { padding: 8px 12px; font-size: 0.68rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cube-tip { transition: none; }
+    .home-title, .home-kicker, .home-hint { animation: none !important; }
+}

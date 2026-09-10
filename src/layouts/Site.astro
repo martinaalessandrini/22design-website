@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  current?: "progetti" | "works" | "studio" | "contatti";
+}
+
+const { title, description, current } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <Header current={current} />
+  <slot />
+  <Footer />
+  <script src="../scripts/site.ts"></script>
+</Base>

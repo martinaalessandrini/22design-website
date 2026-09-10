@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+import {
+  CATEGORIES,
+  PROJECTS,
+  categoryCount,
+} from "../data/projects";
+import "../styles/global.css";
+import "../styles/home.css";
+
+const title = "STUDIO MONO — Architettura Contemporanea";
+const description =
+  "STUDIO MONO — studio di architettura contemporanea. Il modello orbitale dell'archivio: residenze, interior e allestimenti, spazi pubblici e concorsi.";
+---
+
+<Base title={title} description={description} home>
+  <div id="scene" role="img" aria-label="Modello orbitale dei progetti dello studio"></div>
+
+  <header class="home-header">
+    <a href="/" class="logo">STUDIO&nbsp;MONO<sup>®</sup></a>
+    <nav class="home-nav" aria-label="Navigazione principale">
+      <a href="/works">Works</a>
+      <a href="/studio">Studio</a>
+      <a href="/contatti">Contatti</a>
+    </nav>
+  </header>
+
+  <div class="home-ui">
+    <p class="mono home-kicker" id="homeKicker">Archivio orbitale — {PROJECTS.length} progetti</p>
+    <h1 class="home-title">Il <em>modello</em><br>dello studio.</h1>
+    <p class="mono home-hint" id="homeHint">Trascina per esplorare · rotella per avvicinare · clicca un progetto</p>
+    <nav class="home-filters mono" id="homeFilters" aria-label="Filtra progetti">
+      <span class="mono home-filters-label">Filtra:</span>
+      {
+        CATEGORIES.map((cat) => (
+          <button
+            type="button"
+            class:list={["home-filter", { active: cat.id === "ALL" }]}
+            data-filter={cat.id}
+            disabled
+          >
+            {cat.label} <span>({categoryCount(cat.id)})</span>
+          </button>
+        ))
+      }
+    </nav>
+    <p class="mono home-legal">
+      Solo cookie tecnici, nessun tracciamento. <a href="/cookies">Cookie policy</a>
+    </p>
+  </div>
+
+  <div class="cube-tip is-hidden" id="cubeTip" aria-hidden="true">
+    <div class="cube-tip-inner"></div>
+  </div>
+
+  <div class="home-loading" id="homeLoading" role="status">Caricamento del modello…</div>
+  <script src="../scripts/home.ts"></script>
+</Base>
