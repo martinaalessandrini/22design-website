@@ -2,6 +2,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import gsap from "gsap";
+import { advanceOrbit } from "../lib/orbit";
 
 export function createHome3D(container, projects) {
         function reduceMotion() {
@@ -172,8 +173,6 @@ export function createHome3D(container, projects) {
                 group.userData.baseColor = monoMat.color.clone();
                 group.userData.angle = (i / projects.length) * Math.PI * 2;
                 group.userData.yOff = (Math.random() - 0.5) * 0.5;
-                // Velocità orbitale leggermente diversa per ogni cubo.
-                group.userData.drift = 0.95 + Math.random() * 0.1;
 
                 // Precarica la foto del progetto (se presente) per l'hover.
                 if (project.photo) getPhotoTexture(project);
@@ -626,8 +625,13 @@ export function createHome3D(container, projects) {
             var target = (motionOn && !document.hidden && !interacting && !relayout) ? idleFactor() : 0;
             driftSpeed += (target * DRIFT_MAX - driftSpeed) * Math.min(1, dt * 1.4);
             if (!relayout && Math.abs(driftSpeed) > 1e-7) {
-                cubes.forEach(function (g) {
-                    g.userData.angle += driftSpeed * dt * g.userData.drift;
+                var moving = [];
+                for (var c = 0; c < cubes.length; c += 1) {
+                    if (cubes[c].visible) moving.push(cubes[c]);
+                }
+                var next = advanceOrbit(moving.map(function (g) { return g.userData.angle; }), driftSpeed * dt);
+                moving.forEach(function (g, i) {
+                    g.userData.angle = next[i];
                     positionFromAngle(g);
                 });
             }
