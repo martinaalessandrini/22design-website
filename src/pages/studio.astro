@@ -1,10 +1,6 @@
 ---
 import Site from "../layouts/Site.astro";
-import { paginaInterna } from "../lib/chiusura";
 import { categorieOccupate, withBase } from "../lib/archivio";
-
-const chiuso = paginaInterna(Astro);
-if (chiuso) return chiuso;
 
 const categorie = await categorieOccupate();
 ---

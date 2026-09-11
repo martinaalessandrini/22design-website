@@ -553,13 +553,6 @@ section { max-width: 1680px; margin: 0 auto; }
 }
 .footer-links { list-style: none; display: flex; gap: 22px; }
 .footer-links a:hover { text-decoration: underline; }
-.footer-cookies {
-    flex: 1 1 100%;
-    opacity: 0.5;
-    line-height: 1.5;
-    max-width: 52rem;
-}
-.footer-cookies a { text-decoration: underline; }
 
 .legal-page {
     padding: 0 var(--pad) calc(var(--pad) * 1.5);

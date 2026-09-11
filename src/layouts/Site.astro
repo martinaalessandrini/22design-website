@@ -7,13 +7,13 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description: string;
-  current?: "progetti" | "works" | "studio" | "contatti";
+  current?: "progetti" | "studio" | "contatti";
 }
 
 const { title, description, current } = Astro.props;
 ---
 
-<Base title={title} description={description} noindex>
+<Base title={title} description={description}>
   <Header current={current} />
   <slot />
   <Footer />

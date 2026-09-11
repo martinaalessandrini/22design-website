@@ -2,7 +2,7 @@
 import { withBase } from "../lib/archivio";
 
 interface Props {
-  current?: "progetti" | "works" | "studio" | "contatti";
+  current?: "progetti" | "studio" | "contatti";
 }
 
 const { current } = Astro.props;
@@ -12,8 +12,7 @@ const { current } = Astro.props;
   <div class="site-header-inner">
     <a href={withBase()} class="logo">22DESIGN<sup>®</sup></a>
     <nav class="nav-links" id="navLinks">
-      <a href={withBase("progetti")} class={current === "progetti" ? "active" : undefined}>Progetti</a>
-      <a href={withBase("works")} class={current === "works" ? "active" : undefined}>Works</a>
+      <a href={withBase("works")} class={current === "progetti" ? "active" : undefined}>Progetti</a>
       <a href={withBase("studio")} class={current === "studio" ? "active" : undefined}>Studio</a>
       <a href={withBase("contatti")} class={current === "contatti" ? "active" : undefined}>Contatti</a>
     </nav>

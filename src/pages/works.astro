@@ -1,6 +1,5 @@
 ---
 import Site from "../layouts/Site.astro";
-import { paginaInterna } from "../lib/chiusura";
 import {
   categorieOccupate,
   categoriaPrincipale,
@@ -10,9 +9,6 @@ import {
   tuttiIProgetti,
   withBase,
 } from "../lib/archivio";
-
-const chiuso = paginaInterna(Astro);
-if (chiuso) return chiuso;
 
 const [progetti, categorie] = await Promise.all([tuttiIProgetti(), categorieOccupate()]);
 const cards = await Promise.all(
@@ -24,9 +20,9 @@ const cards = await Promise.all(
 ---
 
 <Site
-  title="Works — 22DESIGN"
+  title="Progetti — 22DESIGN"
   description="Tutti i progetti di 22DESIGN: residenze, architetture culturali e spazi pubblici."
-  current="works"
+  current="progetti"
 >
   <main>
     <section class="page-hero">

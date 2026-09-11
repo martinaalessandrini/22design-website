@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import Site from "../../layouts/Site.astro";
-import { paginaInterna } from "../../lib/chiusura";
 import {
   categoriaPrincipale,
   fallbackIdea,
@@ -26,9 +25,6 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const chiuso = paginaInterna(Astro);
-if (chiuso) return chiuso;
-
 const principale = await categoriaPrincipale(project);
 const label = principale?.data.label ?? "";
 const lastWordItalic = titleHtml(project.data.titolo);
@@ -38,7 +34,7 @@ const intro = project.data.intro ?? fallbackIntro(project.data.titolo, label);
 <Site
   title={`${project.data.titolo} — 22DESIGN`}
   description={`${project.data.titolo}: ${label} progettato da 22DESIGN, ${project.data.anno}.`}
-  current="works"
+  current="progetti"
 >
   <main class="detail">
     <section class="detail-head">
