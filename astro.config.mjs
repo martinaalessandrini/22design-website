@@ -2,6 +2,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://martinaalessandrini.github.io',
-  base: '/Test-astro-grill',
+  site: 'https://22design.it',
+  base: '/',
 });

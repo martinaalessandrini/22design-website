@@ -3,42 +3,42 @@
 /* Poppins: testi, navigazione, categorie e UI (locale, niente font esterni). */
 @font-face {
     font-family: "Poppins";
-    src: url("/Test-astro-grill/fonts/poppins/Poppins-Regular.ttf") format("truetype");
+    src: url("/fonts/poppins/Poppins-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: "Poppins";
-    src: url("/Test-astro-grill/fonts/poppins/Poppins-Italic.ttf") format("truetype");
+    src: url("/fonts/poppins/Poppins-Italic.ttf") format("truetype");
     font-weight: 400;
     font-style: italic;
     font-display: swap;
 }
 @font-face {
     font-family: "Poppins";
-    src: url("/Test-astro-grill/fonts/poppins/Poppins-Medium.ttf") format("truetype");
+    src: url("/fonts/poppins/Poppins-Medium.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: "Poppins";
-    src: url("/Test-astro-grill/fonts/poppins/Poppins-SemiBold.ttf") format("truetype");
+    src: url("/fonts/poppins/Poppins-SemiBold.ttf") format("truetype");
     font-weight: 600;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: "Poppins";
-    src: url("/Test-astro-grill/fonts/poppins/Poppins-Bold.ttf") format("truetype");
+    src: url("/fonts/poppins/Poppins-Bold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: "Poppins";
-    src: url("/Test-astro-grill/fonts/poppins/Poppins-ExtraBold.ttf") format("truetype");
+    src: url("/fonts/poppins/Poppins-ExtraBold.ttf") format("truetype");
     font-weight: 800;
     font-style: normal;
     font-display: swap;
@@ -47,14 +47,14 @@
 /* Playfair Display (variabile): titoli di sottocategorie/sezioni. */
 @font-face {
     font-family: "Playfair Display";
-    src: url("/Test-astro-grill/fonts/playfairdisplay/PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
+    src: url("/fonts/playfairdisplay/PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
     font-weight: 400 900;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: "Playfair Display";
-    src: url("/Test-astro-grill/fonts/playfairdisplay/PlayfairDisplay-Italic-VariableFont_wght.ttf") format("truetype");
+    src: url("/fonts/playfairdisplay/PlayfairDisplay-Italic-VariableFont_wght.ttf") format("truetype");
     font-weight: 400 900;
     font-style: italic;
     font-display: swap;
