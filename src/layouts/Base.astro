@@ -5,9 +5,10 @@ interface Props {
   title: string;
   description: string;
   home?: boolean;
+  noindex?: boolean;
 }
 
-const { title, description, home = false } = Astro.props;
+const { title, description, home = false, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,6 +18,7 @@ const { title, description, home = false } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/png" href={withBase("favicon.png")} />
   </head>
   <body class={home ? "home-body" : undefined}>

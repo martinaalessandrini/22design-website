@@ -1,65 +1,21 @@
 ---
 import Base from "../layouts/Base.astro";
-import {
-  categorieOccupate,
-  contaPerCategoria,
-  cubiHome,
-  tuttiIProgetti,
-  withBase,
-} from "../lib/archivio";
 import "../styles/global.css";
 import "../styles/home.css";
 
-const title = "STUDIO MONO — Architettura Contemporanea";
+const title = "STUDIO MONO — Sito in costruzione";
 const description =
-  "STUDIO MONO — studio di architettura contemporanea. Il modello orbitale dell'archivio: residenze, interior e allestimenti, spazi pubblici e concorsi.";
-
-const [progetti, categorie, cubi] = await Promise.all([
-  tuttiIProgetti(),
-  categorieOccupate(),
-  cubiHome(),
-]);
+  "STUDIO MONO — studio di architettura contemporanea. Il nuovo sito è in costruzione.";
 ---
 
 <Base title={title} description={description} home>
-  <script id="archivio-json" type="application/json" is:inline set:html={JSON.stringify(cubi)} />
-  <div id="scene" role="img" aria-label="Modello orbitale dei progetti dello studio"></div>
-
   <header class="home-header">
-    <a href={withBase()} class="logo">STUDIO&nbsp;MONO<sup>®</sup></a>
-    <nav class="home-nav" aria-label="Navigazione principale">
-      <a href={withBase("works")}>Works</a>
-      <a href={withBase("studio")}>Studio</a>
-      <a href={withBase("contatti")}>Contatti</a>
-    </nav>
+    <span class="logo">STUDIO&nbsp;MONO<sup>®</sup></span>
   </header>
 
-  <div class="home-ui">
-    <p class="mono home-kicker" id="homeKicker">Archivio orbitale — {progetti.length} progetti</p>
-    <h1 class="home-title">Il <em>modello</em><br>dello studio.</h1>
-    <p class="mono home-hint" id="homeHint">Trascina per esplorare · rotella per avvicinare · clicca un progetto</p>
-    <nav class="home-filters mono" id="homeFilters" aria-label="Filtra progetti">
-      <span class="mono home-filters-label">Filtra:</span>
-      <button type="button" class="home-filter active" data-filter="ALL" disabled>
-        All <span>({progetti.length})</span>
-      </button>
-      {
-        categorie.map((cat) => (
-          <button type="button" class="home-filter" data-filter={cat.id} disabled>
-            {cat.data.label} <span>({contaPerCategoria(progetti, cat.id)})</span>
-          </button>
-        ))
-      }
-    </nav>
-    <p class="mono home-legal">
-      Solo cookie tecnici, nessun tracciamento. <a href={withBase("cookies")}>Cookie policy</a>
-    </p>
+  <div class="home-ui coming-soon-ui">
+    <p class="mono home-kicker">Milano — nuovo sito in arrivo</p>
+    <h1 class="home-title">Sito in <em>costruzione</em>.</h1>
+    <p class="mono home-hint">Stiamo preparando l'archivio. Torna a trovarci a breve.</p>
   </div>
-
-  <div class="cube-tip is-hidden" id="cubeTip" aria-hidden="true">
-    <div class="cube-tip-inner"></div>
-  </div>
-
-  <div class="home-loading" id="homeLoading" role="status">Caricamento del modello…</div>
-  <script src="../scripts/home.ts"></script>
 </Base>

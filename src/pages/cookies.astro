@@ -1,5 +1,9 @@
 ---
 import Site from "../layouts/Site.astro";
+import { paginaInterna } from "../lib/chiusura";
+
+const chiuso = paginaInterna(Astro);
+if (chiuso) return chiuso;
 ---
 
 <Site

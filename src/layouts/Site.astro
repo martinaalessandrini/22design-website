@@ -13,7 +13,7 @@ interface Props {
 const { title, description, current } = Astro.props;
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} noindex>
   <Header current={current} />
   <slot />
   <Footer />

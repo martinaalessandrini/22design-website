@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Site from "../../layouts/Site.astro";
+import { paginaInterna } from "../../lib/chiusura";
 import {
   categoriaPrincipale,
   fallbackIdea,
@@ -25,6 +26,9 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const chiuso = paginaInterna(Astro);
+if (chiuso) return chiuso;
+
 const principale = await categoriaPrincipale(project);
 const label = principale?.data.label ?? "";
 const lastWordItalic = titleHtml(project.data.titolo);
