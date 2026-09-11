@@ -47,8 +47,7 @@ export function createHome3D(container, projects) {
         rim.position.set(-6, -2, -4);
         scene.add(rim);
 
-        // Stato animabile della traiettoria.
-        var orbit = { radius: 4 };
+        var orbit = { radius: 4, y: 1.75 };
 
         // --- Cubetti (un cubo per progetto) ---
         var cubes = [];
@@ -133,7 +132,7 @@ export function createHome3D(container, projects) {
         function positionFromAngle(group) {
             group.position.set(
                 Math.cos(group.userData.angle) * orbit.radius,
-                group.userData.yOff,
+                orbit.y + group.userData.yOff,
                 Math.sin(group.userData.angle) * orbit.radius
             );
         }
@@ -208,14 +207,39 @@ export function createHome3D(container, projects) {
         controls.enablePan = false;
         controls.target.set(0, 0, 0);
         controls.minDistance = 2.2;
-        controls.maxDistance = 30;
+        controls.maxDistance = 48;
         controls.minPolarAngle = 0.2;
         controls.maxPolarAngle = Math.PI * 0.48;
 
         var dist = orbit.radius * 2.1 + 1.4;
-        camera.position.set(dist * 0.5, dist * 0.42, dist * 0.82);
-        camera.lookAt(0, 0, 0);
-        controls.update();
+
+        function framedDist() {
+            var desktop = orbit.radius * 2.1 + 1.4;
+            if (width() > 720) return desktop;
+            var aspect = Math.max(0.2, width() / height());
+            var vFov = (camera.fov * Math.PI) / 180;
+            var hFov = 2 * Math.atan(Math.tan(vFov / 2) * aspect);
+            var reach = orbit.radius + 0.72;
+            var need = reach / Math.max(0.08, Math.tan(hFov / 2) * 0.9);
+            var k = Math.sqrt(0.5 * 0.5 + 0.42 * 0.42 + 0.82 * 0.82);
+            return Math.max(desktop, need / k);
+        }
+
+        function applyCameraFrame(fromCurrent) {
+            dist = framedDist();
+            var tx = dist * 0.5;
+            var ty = dist * 0.42;
+            var tz = dist * 0.82;
+            if (fromCurrent && camera.position.lengthSq() > 0.01) {
+                camera.position.setLength(Math.sqrt(tx * tx + ty * ty + tz * tz));
+            } else {
+                camera.position.set(tx, ty, tz);
+            }
+            camera.lookAt(0, 0, 0);
+            controls.update();
+        }
+
+        applyCameraFrame(false);
 
         renderer.domElement.style.touchAction = "none";
         renderer.domElement.style.cursor = "grab";
@@ -690,6 +714,7 @@ export function createHome3D(container, projects) {
             camera.aspect = width() / height();
             camera.updateProjectionMatrix();
             renderer.setSize(width(), height());
+            applyCameraFrame(true);
             // Lo sfondo a tutta pagina copre sempre esattamente il viewport.
             var halfH = _bgHalfH();
             bgMesh.scale.set(halfH * 2 * (width() / height()), halfH * 2, 1);
@@ -708,10 +733,10 @@ export function createHome3D(container, projects) {
 
         // --- Bootstrap ---
         renderer.setSize(width(), height());
-        // First sizing of camera + background (prima dei resize eventi).
-        resize();
         container.appendChild(renderer.domElement);
         build(projects);
+        applyCameraFrame(false);
+        resize();
         entrance();
         tick();
 
