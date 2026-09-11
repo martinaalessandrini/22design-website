@@ -57,7 +57,7 @@ export function projectPic(foto: string, n: "01" | "02" | "03") {
 }
 
 export function fallbackIntro(titolo: string, categoria: string) {
-  return `${titolo} è un progetto di STUDIO MONO (${categoria}): un lavoro in cui forma, materia e luce lavorano insieme per rendere lo spazio semplice e riconoscibile.`;
+  return `${titolo} è un progetto di 22DESIGN (${categoria}): un lavoro in cui forma, materia e luce lavorano insieme per rendere lo spazio semplice e riconoscibile.`;
 }
 
 export function fallbackIdea() {

@@ -83,7 +83,7 @@ if (form && status) {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: accessKey,
-          subject: "Nuovo messaggio dal sito STUDIO MONO",
+          subject: "Nuovo messaggio dal sito 22DESIGN",
           name: nome.value.trim(),
           email: email.value.trim(),
           categoria: categoria.value,

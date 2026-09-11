@@ -1,4 +1,4 @@
-# STUDIO MONO
+# 22DESIGN
 
 Portfolio dello studio: lavori in archivio, raggruppati per ambiti.
 

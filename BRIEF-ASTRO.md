@@ -1,4 +1,4 @@
-# STUDIO MONO® — Brief per il sito
+# 22DESIGN® — Brief per il sito
 
 Documento di consegna per **Astro**.  
 Serve a rifare / mettere in produzione il sito partendo dal prototipo già funzionante.
@@ -13,7 +13,7 @@ Questo file descrive **cosa deve fare il sito**, non come deve essere scritto il
 
 ## 1. Cos’è
 
-Portfolio di **STUDIO MONO®**, studio di architettura contemporanea (Milano).  
+Portfolio di **22DESIGN®**, studio di architettura contemporanea (Milano).  
 Poche pagine, molto spazio, tono essenziale. Il pezzo centrale è la **home 3D**: i progetti sono cubi che orbitano.
 
 Lingua dell’interfaccia: **italiano**.  
@@ -32,7 +32,7 @@ Alcune voci di menu restano in inglese perché è una scelta di identità: **Wor
 | Linee | nero al 16% di opacità |
 | Font principale | **Poppins** (già in `assets/fonts/poppins/`) |
 | Font secondario | **Playfair Display** (titoli di sezione, già in `assets/fonts/playfairdisplay/`) |
-| Logo | `STUDIO MONO` + ® in accento, tutto maiuscolo |
+| Logo | `22DESIGN` + ® in accento, tutto maiuscolo |
 | Titoli pagina | enormi, uppercase, peso 800; una parola in *italic* + colore accento |
 
 Niente emoji. Niente ombre pesanti. Niente stock UI.  
@@ -151,7 +151,7 @@ Recapiti mostrati (alcuni sono di prova, da confermare prima del go-live):
 
 - Via Canova 14, 20145 Milano, IT
 - Ven. 9:00 — 18:00 o su appuntamento
-- `studio@mono.example`
+- `studio@22design.it`
 - +39 02 5512 3456
 - Instagram, LinkedIn, Are.na (link ancora `#`)
 
@@ -174,7 +174,7 @@ Se introduci Google Analytics, cookie di terze parti o ads, la policy va riscrit
 
 Da trattare come contenuto finto o da validare:
 
-- Email `studio@mono.example`
+- Email `studio@22design.it`
 - Telefono e orari
 - Indirizzo Via Canova
 - Foto team (oggi sono gradienti, non ritratti)

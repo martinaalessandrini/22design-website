@@ -14,9 +14,9 @@ import "../styles/home.css";
 const chiuso = paginaInterna(Astro);
 if (chiuso) return chiuso;
 
-const title = "STUDIO MONO — Architettura Contemporanea";
+const title = "22DESIGN — Architettura Contemporanea";
 const description =
-  "STUDIO MONO — studio di architettura contemporanea. Il modello orbitale dell'archivio: residenze, interior e allestimenti, spazi pubblici e concorsi.";
+  "22DESIGN — studio di architettura contemporanea. Il modello orbitale dell'archivio: residenze, interior e allestimenti, spazi pubblici e concorsi.";
 
 const [progetti, categorie, cubi] = await Promise.all([
   tuttiIProgetti(),
@@ -30,7 +30,7 @@ const [progetti, categorie, cubi] = await Promise.all([
   <div id="scene" role="img" aria-label="Modello orbitale dei progetti dello studio"></div>
 
   <header class="home-header">
-    <a href={withBase("progetti")} class="logo">STUDIO&nbsp;MONO<sup>®</sup></a>
+    <a href={withBase("progetti")} class="logo">22DESIGN<sup>®</sup></a>
     <nav class="home-nav" aria-label="Navigazione principale">
       <a href={withBase("works")}>Works</a>
       <a href={withBase("studio")}>Studio</a>

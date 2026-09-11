@@ -1,4 +1,4 @@
-﻿/* ============ STUDIO MONO â€” Global ============ */
+﻿/* ============ 22DESIGN — Global ============ */
 
 /* Poppins: testi, navigazione, categorie e UI (locale, niente font esterni). */
 @font-face {
@@ -123,6 +123,7 @@ img, span.ph { display: block; }
     font-weight: 800;
     font-size: 1.05rem;
     letter-spacing: 0.02em;
+    text-transform: uppercase;
 }
 .logo sup { color: var(--accent); font-size: 0.55em; }
 
